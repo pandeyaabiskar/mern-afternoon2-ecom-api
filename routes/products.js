@@ -1,26 +1,11 @@
-const productData = require("../data/products.json");
-
+const {returnAllProducts, returnSingleProduct, createProduct} = require('../controllers/products')
 const express = require("express");
 const router = express.Router();
 
-router.get("/", (req, res) => {
-  const { category } = req.query;
-  //Check if category is undefined or not
-  //If not undefined, filter the data by provided category
-  if (category) {
-    const filteredData = productData.filter(
-      (product) => product.category === category
-    );
-    res.json(filteredData);
-  } else {
-    //If undefined, send all product data
-    res.json(productData);
-  }
-});
-
-router.get("/:productID", (req, res) => {
-  const { productID } = req.params;
-  res.json(productData[productID]);
-});
+router.get("/", returnAllProducts);
+router.get("/:productID", returnSingleProduct);
+router.post("/" , createProduct);
+// router.put("/:productID", (req, res) => {});
+// router.delete("/:productID", (req, res) => {});
 
 module.exports = router;
