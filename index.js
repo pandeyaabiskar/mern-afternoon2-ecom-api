@@ -20,7 +20,7 @@ app.get("/products/:productID", (req, res) => {
   const selectedProduct = productData.find(
     (product) => product.id === parseInt(productID)
   );
-  res.render("details", { product: selectedProduct });
+  res.render("details", selectedProduct);
 });
 
 app.use("/api/products", productRouter);
