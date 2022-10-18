@@ -2,14 +2,18 @@ const express = require("express");
 const cors = require("cors");
 const productRouter = require("./routes/products");
 const productData = require("./data/products.json");
-const hbs = require('hbs');
+const hbs = require("hbs");
+const connectDatabase = require("./database/connection");
 
 //Creating a server
 const app = express();
 
+//Connect to database
+connectDatabase();
+
 //Setup our server
 app.use(cors());
-app.use(express.json());    
+app.use(express.json());
 app.set("view engine", "hbs");
 app.set("views", "./templates");
 app.use(express.static(__dirname + "/public"));
@@ -19,14 +23,14 @@ hbs.registerPartials(__dirname + "/templates/partials");
 
 //Our Middlewares
 const logger = (req, res, next) => {
-    console.log("This is middleware");
-    next();
-}
+  console.log("This is middleware");
+  next();
+};
 
 const logger2 = (req, res, next) => {
-    console.log("This is second middleware");
-    next();
-}
+  console.log("This is second middleware");
+  next();
+};
 
 // app.use(logger);
 
